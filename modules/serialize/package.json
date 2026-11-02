@@ -1,6 +1,6 @@
 {
   "name": "@aws-crypto/serialize",
-  "version": "4.0.0",
+  "version": "5.0.2",
   "scripts": {
     "prepublishOnly": "tsc -p tsconfig.json && tsc -p tsconfig.module.json",
     "lint": "run-s lint-*",
@@ -19,8 +19,12 @@
   "dependencies": {
     "@aws-crypto/material-management": "file:../material-management",
     "asn1.js": "^5.3.0",
-    "bn.js": "^5.1.1",
-    "tslib": "^2.2.0"
+    "bn.js": "^5.2.3",
+    "tslib": "^2.2.0",
+    "uuid": "^11.1.1"
+  },
+  "devDependencies": {
+    "@types/uuid": "^10.0.0"
   },
   "sideEffects": false,
   "main": "./build/main/src/index.js",
@@ -28,5 +32,10 @@
   "types": "./build/main/src/index.d.ts",
   "files": [
     "build/**/src/*"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aws/aws-encryption-sdk-javascript.git",
+    "directory": "modules/serialize"
+  }
 }

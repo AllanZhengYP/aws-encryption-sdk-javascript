@@ -16,7 +16,9 @@ chai.use(chaiAsPromised)
 const { expect } = chai
 // @ts-ignore
 import from from 'from2'
-const { decrypt } = buildDecrypt(CommitmentPolicy.FORBID_ENCRYPT_ALLOW_DECRYPT)
+const { decrypt, decryptUnsignedMessageStream } = buildDecrypt(
+  CommitmentPolicy.FORBID_ENCRYPT_ALLOW_DECRYPT
+)
 
 describe('decrypt', () => {
   it('string with encoding', async () => {
@@ -140,6 +142,54 @@ describe('decrypt', () => {
     })
   })
 
+  /* Multi-frame messages must decrypt to exactly the bytes that were encrypted
+   * through both the one-shot and streaming APIs.
+   */
+  it('decrypts all frames of a multi-frame message (one-shot).', async () => {
+    const ciphertext = Buffer.from(
+      fixtures.base64CiphertextAlgAes256GcmIv12Tag16Hkdf3FrameLength16384(),
+      'base64'
+    )
+    const expected = Buffer.alloc(40960)
+    for (let i = 0; i < expected.length; i++) expected[i] = i & 0xff
+
+    const { plaintext } = await decrypt(fixtures.decryptKeyring(), ciphertext)
+    expect(plaintext.length).to.equal(expected.length)
+    expect(plaintext.equals(expected)).to.equal(true)
+  })
+
+  it('decrypts all frames of a multi-frame message across source chunk boundaries (streaming).', async () => {
+    const ciphertext = Buffer.from(
+      fixtures.base64CiphertextAlgAes256GcmIv12Tag16Hkdf3FrameLength16384(),
+      'base64'
+    )
+    const expected = Buffer.alloc(40960)
+    for (let i = 0; i < expected.length; i++) expected[i] = i & 0xff
+
+    const results = await Promise.all(
+      [
+        { size: 16384 }, // exactly one frame
+        { size: 32768 }, // spans a frame boundary
+        { size: ciphertext.length }, // whole buffer
+      ].map(
+        async (op) =>
+          new Promise<Buffer>((resolve, reject) => {
+            const chunks: Buffer[] = []
+            chunkCipherTextStream(ciphertext, op)
+              .pipe(decryptUnsignedMessageStream(fixtures.decryptKeyring()))
+              .on('data', (chunk: Buffer) => chunks.push(chunk))
+              .on('error', reject)
+              .on('end', () => resolve(Buffer.concat(chunks)))
+          })
+      )
+    )
+
+    results.map((plaintext) => {
+      expect(plaintext.length).to.equal(expected.length)
+      expect(plaintext.equals(expected)).to.equal(true)
+    })
+  })
+
   it('Precondition: The sequence number is required to monotonically increase, starting from 1.', async () => {
     return expect(
       decrypt(fixtures.decryptKeyring(), fixtures.frameSequenceOutOfOrder(), {
@@ -213,6 +263,50 @@ describe('decrypt', () => {
         encoding: 'base64',
       })
     ).to.rejectedWith(Error, 'maxEncryptedDataKeys exceeded.')
+  })
+
+  it('will fail to decrypt ciphertext with high utf8 codepoints and no utf8 sorting on keyring', async () => {
+    const { decrypt } = buildDecrypt({
+      commitmentPolicy: CommitmentPolicy.FORBID_ENCRYPT_ALLOW_DECRYPT,
+      maxEncryptedDataKeys: 3,
+    })
+    const hkeyring = fixtures.hKeyring(false)
+    const ciphertext = fixtures.hierarchyMessageWithHighUtf8CodePoints()
+
+    await expect(
+      decrypt(hkeyring, ciphertext, {
+        encoding: 'base64',
+      })
+    ).to.rejectedWith(Error, 'Unsupported state or unable to authenticate data')
+  })
+
+  it('will decrypt ciphertext with high utf8 codepoints with a keyring configured to do utf8 sorting', async () => {
+    const { decrypt } = buildDecrypt({
+      commitmentPolicy: CommitmentPolicy.FORBID_ENCRYPT_ALLOW_DECRYPT,
+      maxEncryptedDataKeys: 3,
+    })
+    const hkeyring = fixtures.hKeyring(true)
+    const ciphertext = fixtures.hierarchyMessageWithHighUtf8CodePoints()
+    const { plaintext } = await decrypt(hkeyring, ciphertext, {
+      encoding: 'base64',
+    })
+    expect(plaintext).to.deep.equal(Buffer.from('Hello World'))
+  })
+
+  it('will decrypt ciphertext with high utf8 codepoints with a multikeyring with both utf8 and no utf8 sorting', async () => {
+    const { decrypt } = buildDecrypt({
+      commitmentPolicy: CommitmentPolicy.FORBID_ENCRYPT_ALLOW_DECRYPT,
+      maxEncryptedDataKeys: 3,
+    })
+    const hkeyringUtf8 = fixtures.hKeyring(true)
+    const hkeyringNoUtf8 = fixtures.hKeyring(false)
+    const multikeyring = fixtures.multiKeyring(hkeyringUtf8, hkeyringNoUtf8)
+
+    const ciphertext = fixtures.hierarchyMessageWithHighUtf8CodePoints()
+    const { plaintext } = await decrypt(multikeyring, ciphertext, {
+      encoding: 'base64',
+    })
+    expect(plaintext).to.deep.equal(Buffer.from('Hello World'))
   })
 })
 

@@ -28,10 +28,10 @@ import {
   MessageIdLength,
   serializeMessageHeaderAuth,
 } from '@aws-crypto/serialize'
-import { fromUtf8 } from '@aws-sdk/util-utf8-browser'
+import { fromUtf8 } from '@smithy/util-utf8'
 import { getWebCryptoBackend } from '@aws-crypto/web-crypto-backend'
 
-const serialize = serializeFactory(fromUtf8)
+const serialize = serializeFactory(fromUtf8, { utf8Sorting: true })
 const { messageAADContentString, messageAAD } = aadFactory(fromUtf8)
 
 export interface EncryptInput {

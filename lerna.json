@@ -1,11 +1,12 @@
 {
   "packages": ["modules/*"],
-  "version": "4.0.0",
+  "version": "5.0.2",
   "command": {
     "bootstrap": {
       "nohoist": ["typedoc"]
     }
   },
   "hoist": true,
-  "nohoist": ["typedoc"]
+  "nohoist": ["typedoc"],
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }

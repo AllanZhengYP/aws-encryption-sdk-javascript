@@ -3,6 +3,111 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.2](https://github.com/aws/aws-encryption-sdk-javascript/compare/v5.0.1...v5.0.2) (2026-07-23)
+
+**Note:** Version bump only for package aws-encryption-sdk-javascript
+
+## [5.0.1](https://github.com/aws/aws-encryption-sdk-javascript/compare/v5.0.0...v5.0.1) (2026-07-23)
+
+### Bug Fixes
+
+- **ci:** pass branch input into shared-ci for release workflow ([#1674](https://github.com/aws/aws-encryption-sdk-javascript/issues/1674)) ([7237bf2](https://github.com/aws/aws-encryption-sdk-javascript/commit/7237bf283f87355f2fd927239295ce7da2424d26))
+- **ci:** release from the dispatched branch instead of a branch input ([#1675](https://github.com/aws/aws-encryption-sdk-javascript/issues/1675)) ([235d871](https://github.com/aws/aws-encryption-sdk-javascript/commit/235d8716adae11a6bcc9cf9ad85768db42c1f93d))
+- **decrypt-node:** single-consumer output stream for framed decrypt ([#1670](https://github.com/aws/aws-encryption-sdk-javascript/issues/1670)) ([77fbd26](https://github.com/aws/aws-encryption-sdk-javascript/commit/77fbd260eddd155eb8ab8b21771afc49c0ad1841))
+- **release:** drop --unsafe-perm from publish npm ci ([#1682](https://github.com/aws/aws-encryption-sdk-javascript/issues/1682)) ([4081d91](https://github.com/aws/aws-encryption-sdk-javascript/commit/4081d914f550baea16d3e8cf673f5c0acb0f7a42))
+- **release:** Prevent script injection via dist_tag input ([#1668](https://github.com/aws/aws-encryption-sdk-javascript/issues/1668)) ([d2aee46](https://github.com/aws/aws-encryption-sdk-javascript/commit/d2aee46e128e68b3286a3da7d3341cf2b321a31a))
+- **release:** publish on Node LTS so npm@latest installs ([#1680](https://github.com/aws/aws-encryption-sdk-javascript/issues/1680)) ([f0f6548](https://github.com/aws/aws-encryption-sdk-javascript/commit/f0f6548809b4a2cd4a9bbc589bb8cba1d74eecb9))
+- **release:** source test vector values from one file so npm 12 can run scripts ([#1683](https://github.com/aws/aws-encryption-sdk-javascript/issues/1683)) ([a05aa80](https://github.com/aws/aws-encryption-sdk-javascript/commit/a05aa8065be0908287c40f92b10f564eb9799b66))
+- **release:** stop passing removed branch input to shared-ci ([#1678](https://github.com/aws/aws-encryption-sdk-javascript/issues/1678)) ([babf30d](https://github.com/aws/aws-encryption-sdk-javascript/commit/babf30d72afcbc6e747d3a032fe7fc4ea283a8dc))
+- use environment for release ci ([#1667](https://github.com/aws/aws-encryption-sdk-javascript/issues/1667)) ([6adf90b](https://github.com/aws/aws-encryption-sdk-javascript/commit/6adf90bb07bfc1ff2493468d9a3e0ccd1002bebd))
+- Using discovery filter while constructing keyring ([#1662](https://github.com/aws/aws-encryption-sdk-javascript/issues/1662)) ([23f3f5b](https://github.com/aws/aws-encryption-sdk-javascript/commit/23f3f5b79eb9e178a28e0507fdd0beddb1e8be63))
+
+# [5.0.0](https://github.com/aws/aws-encryption-sdk-javascript/compare/v4.2.2...v5.0.0) (2026-04-23)
+
+### Bug Fixes
+
+- add repository fields and enable npm provenance for Sigstore OIDC publishing ([0105088](https://github.com/aws/aws-encryption-sdk-javascript/commit/010508876ff489c548261303a98b04bd7dc97e74))
+- **ci:** fix VERSION_BUMP scoping and remove unused NPM token from publish job ([#1653](https://github.com/aws/aws-encryption-sdk-javascript/issues/1653)) ([6fd56ea](https://github.com/aws/aws-encryption-sdk-javascript/commit/6fd56ea4ac135bf7b28faa935b5cd20412ffd4bc))
+- **ci:** force pull in publish step ([#1639](https://github.com/aws/aws-encryption-sdk-javascript/issues/1639)) ([6b74c8c](https://github.com/aws/aws-encryption-sdk-javascript/commit/6b74c8cd573290f33ea0142ea3e5da68005e0468))
+- **ci:** npm otp fix for publish ([#1641](https://github.com/aws/aws-encryption-sdk-javascript/issues/1641)) ([fcaf49f](https://github.com/aws/aws-encryption-sdk-javascript/commit/fcaf49f31821f8453f8ad34e9766efd39084c5ca))
+- **ci:** npm token for publish ([#1640](https://github.com/aws/aws-encryption-sdk-javascript/issues/1640)) ([953ae60](https://github.com/aws/aws-encryption-sdk-javascript/commit/953ae609cd19e4bf508613bb06bac8ed3574f784))
+- correct repository URLs from awslabs to aws org for npm provenance ([f5699bc](https://github.com/aws/aws-encryption-sdk-javascript/commit/f5699bce36c15a72545924b2bdfda6148a7933e1))
+- mitigate dependency issues — remove deprecated packages ([#1654](https://github.com/aws/aws-encryption-sdk-javascript/issues/1654)) ([d795278](https://github.com/aws/aws-encryption-sdk-javascript/commit/d795278bfc6f9d023545f0b36bef701ba5387081))
+- Removes the internal added prefix from custom encryption context before creating the branch key material node object ([#1650](https://github.com/aws/aws-encryption-sdk-javascript/issues/1650)) ([9907b1b](https://github.com/aws/aws-encryption-sdk-javascript/commit/9907b1ba70233edf96ce56eb0e8eb094b93c517f))
+
+- feat!: Drop IE11 support (#1651) ([f11b277](https://github.com/aws/aws-encryption-sdk-javascript/commit/f11b277b802180e89532ff83bced7440e42247e0)), closes [#1651](https://github.com/aws/aws-encryption-sdk-javascript/issues/1651)
+
+### Features
+
+- Adds create and version branch key functionality ([#1652](https://github.com/aws/aws-encryption-sdk-javascript/issues/1652)) ([6fab564](https://github.com/aws/aws-encryption-sdk-javascript/commit/6fab56475d4d2521bca859a66f7ce759aad7ba44)), closes [#1642](https://github.com/aws/aws-encryption-sdk-javascript/issues/1642)
+
+### Reverts
+
+- Revert "v5.0.0" ([4c6f731](https://github.com/aws/aws-encryption-sdk-javascript/commit/4c6f7319c297437357853cb7f8e3d5170369fe60))
+- Revert "v5.0.0" ([e3d58fb](https://github.com/aws/aws-encryption-sdk-javascript/commit/e3d58fbadb8456c1acbcdabe8ac122aba4e8d455))
+- Revert "v5.0.0" ([0ee917e](https://github.com/aws/aws-encryption-sdk-javascript/commit/0ee917e08b202c93d10927eb279132ae03634c0d))
+
+### BREAKING CHANGES
+
+- The AWS Encryption SDK for JavaScript no longer supports Internet Explorer 11 (IE11). The msCrypto shim and related IE11 detection code have been removed from the web-crypto-backend module.
+
+Co-authored-by: Lucas McDonald <lucmcdon@amazon.com>
+
+## [4.2.2](https://github.com/awslabs/aws-encryption-sdk-javascript/compare/v4.2.1...v4.2.2) (2026-03-05)
+
+### Bug Fixes
+
+- **ci-auth:** git release auth ([#1638](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1638)) ([04db819](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/04db819fca842432b714a45a92563045b241c14b))
+- **ci-debug:** log auth username ([#1637](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1637)) ([27003a7](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/27003a78383947c105b3160f329f6af5fc89f826))
+- **ci:** git auth ([#1636](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1636)) ([83d825d](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/83d825dcd15daf1736b27c4c906756ba8c685d52))
+- **ci:** release bot credentials ([#1635](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1635)) ([4870b2c](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/4870b2c4b9f0e51da39693c56b9065e62c7c06c8))
+- **deps:** add missing dependency ([#1629](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1629)) ([7329fb7](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/7329fb700cc09f116f4270d6343324d80d4d4820))
+- remove usage of Buffer from top-level ([#1621](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1621)) ([9556272](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/955627223af2bbbb96a2ee69f2fe64504593aaf2))
+- upgrade bn.js to 4.12.3/5.2.3 ([#1631](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1631)) ([ebbd60f](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/ebbd60f2af27a14f41a7a2bfcca6095dc953df0c))
+
+- feat!: Remove support for NodeJs v16 ([ef26b39](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/ef26b39eb8c8078fcbae3482eaf5ce1ec37e61ba))
+
+### Reverts
+
+- Revert "feat!: Drop IE11 (#1625)" ([7d6902e](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/7d6902e9f80e09434b2b901cf3317e056d872167)), closes [#1625](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1625)
+
+### BREAKING CHANGES
+
+- - no longer tests against nor supports NodeJS 16
+
+## [4.2.1](https://github.com/awslabs/aws-encryption-sdk-javascript/compare/v4.2.0...v4.2.1) (2025-04-10)
+
+### Bug Fixes
+
+- add serializationOptions flag for AAD UTF8 sorting ([#1581](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1581)) ([b80cad1](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/b80cad14df361b4384aeed5753efb57c69d77377))
+
+# [4.2.0](https://github.com/awslabs/aws-encryption-sdk-javascript/compare/v4.1.0...v4.2.0) (2025-02-27)
+
+### Bug Fixes
+
+- include uuid as a dependency in material-management ([#1564](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1564)) ([dee213b](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/dee213bc91dd0cde8dd177da52b739e10129f514))
+
+### Features
+
+- integration-node can produce decrypt manifests ([#1580](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1580)) ([95f0fa1](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/95f0fa10b7d94ccc142fc2e89b2ffa49620285c9))
+
+# [4.1.0](https://github.com/awslabs/aws-encryption-sdk-javascript/compare/v4.0.2...v4.1.0) (2025-01-16)
+
+### Features
+
+- Adding the hierarchical keyring ([#1537](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1537)) ([43dcb16](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/43dcb166d5ac76d744ea283808006f65915b9730))
+
+## [4.0.2](https://github.com/awslabs/aws-encryption-sdk-javascript/compare/v4.0.1...v4.0.2) (2024-10-21)
+
+**Note:** Version bump only for package aws-encryption-sdk-javascript
+
+## [4.0.1](https://github.com/awslabs/aws-encryption-sdk-javascript/compare/v4.0.0...v4.0.1) (2024-07-30)
+
+### Bug Fixes
+
+- Add CVE-2023-46809 option to integration node ([#1424](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1424)) ([84a7034](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/84a703440aa7313ad0c779e50b7c052aa8dd5e7b))
+- **CI:** npx_verdaccio ([#1190](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1190)) ([1051f19](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/1051f19578ba54bc476a30dedf5779576cf46d9f))
+
 # [4.0.0](https://github.com/awslabs/aws-encryption-sdk-javascript/compare/v3.2.2...v4.0.0) (2023-07-17)
 
 - feat!: Remove AWS SDK V2 Dependency (#1180) ([1d74248](https://github.com/awslabs/aws-encryption-sdk-javascript/commit/1d742489b436748a656ecc2abce00e99353d1d62)), closes [#1180](https://github.com/awslabs/aws-encryption-sdk-javascript/issues/1180)
